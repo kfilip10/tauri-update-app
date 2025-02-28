@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@tauri-apps/plugin-os": "^2.2.0",
     "@tauri-apps/plugin-updater": "^2.5.1"
   }
 }
