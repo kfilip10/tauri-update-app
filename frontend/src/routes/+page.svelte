@@ -21,7 +21,7 @@
 </script>
 
 <main>
-	<h1>Welcome to Tauri and SvelteKit: This is an updated version</h1>
+	<h1>Welcome to Tauri and SvelteKit: This is an updated version v2</h1>
 	<p>{message}</p>
 	<Button on:click={callRust}>Call Rusty</Button>
 	<div class="p-8">
