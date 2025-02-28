@@ -8,10 +8,15 @@
 		message = await invoke('greet', { name: 'User' });
 	}
 
-	import { checkForAppUpdates } from '$lib/utils/updater';
+	import { getCurrentVersion, checkForAppUpdates, displayVersionInfo } from '$lib/utils/updater';
+	let currentVersion = 'Loading...';
 
 	async function handleUpdateCheck() {
 		await checkForAppUpdates(true);
+	}
+	async function showVersionInfo() {
+		const info = await displayVersionInfo();
+		alert(info);
 	}
 </script>
 
@@ -25,5 +30,6 @@
 			Change a few things up and try submitting again.
 		</Alert>
 	</div>
-	<Button on:click={handleUpdateCheck}>Check update</Button>
+	<Button on:click={handleUpdateCheck}>Check for Updates</Button>
+	<Button on:click={showVersionInfo}>Version Info</Button>
 </main>

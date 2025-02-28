@@ -1,11 +1,11 @@
 {
-  "version": "0.0.4",
+  "version": "0.0.1",
   "notes": "Your Release Notes go here",
   "pub_date": "2025-02-28T11:18:57Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTWkZvRStkRXNsMmRLcDVzQWt3dlJ5WE11M3BYa0swQVNsOUVtSEdsUVRJZGhUcVd4YWxjeHVxQ2loeDVZSUVGWjRtU01yUnMybEM4UDlDNFZPTS9oMU55cnAweXNFb2c4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQwNzQwNjQ2CWZpbGU6dGF1cmktdXBkYXRlcl8wLjAuM194NjRfZW4tVVMubXNpLnppcAo0NTU5NittRTJPSWt5Vk1IdE9PVHJBZys4TGN2SmkvSFAwaDkxVEJJeE1iOVBtNzRmeVc3THkrSjhZQzh2YkpMendTSmVIdm8rcWRTZ1ZCcnRhTWdDQT09Cg==",
-      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.3/tauri-updater_0.0.3_x64_en-US.msi.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTWkZvRStkRXNsMlFQUWNkeE04b1EvRWVMaUFJR2hBMUoxOTZJczBFeVhuUnJ4dzExMzVPQThjcE5GdlVabE1PeklMYVYvcUNkemlYbmhWZ1hXUUJRbE9VZysrQWp3eEE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQwNzQyMzU2CWZpbGU6dGF1cmktdXBkYXRlcl8wLjAuMV94NjRfZW4tVVMubXNpLnppcApXeGVtaCtVYThiL2RMTzBMcmU0UmFub3FxTlMwWXhReVB4RW1Ba3lYeDhzOEtxTTZpdFY1a0pXWkRkS2crc2pSR2M1S3psbXFJeFBGeStEQ1hvSFZDQT09Cg==",
+      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.3/tauri-updater_0.0.1_x64_en-US.msi.zip"
     }
   }
 }
