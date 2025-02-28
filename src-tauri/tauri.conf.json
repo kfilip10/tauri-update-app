@@ -43,7 +43,7 @@
         "https://github.com/kfilip10/tauri-update-app/releases/latest/download/latest.json"
       ],
       "dialog": true,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDc5MTA2OUFFOUIyODYyMTYKUldRV1lpaWJybWtRZWQ4UlBYYVYzVnVhK1VnQmRlNkdHVS9EZmlsaHRYa09TZ2xyZThwS0VMWXcK"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQ5MjU0Qjc0M0U4MTE2OTkKUldTWkZvRStkRXNsMlJWNVJMb24rYmN0ckxNZE1NbTdRME9VakN0NDU0QUdRU0x5TUNpL09peXkK"
     }
   }
 }
