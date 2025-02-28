@@ -42,7 +42,11 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-node": "^5.2.12",
+		"@sveltejs/adapter-static": "^3.0.8",
 		"@tailwindcss/postcss": "^4.0.9",
-		"@tauri-apps/api": "^2.3.0"
+		"@tauri-apps/api": "^2.3.0",
+		"@tauri-apps/plugin-dialog": "^2.2.0",
+		"@tauri-apps/plugin-updater": "^2.5.1"
 	}
 }

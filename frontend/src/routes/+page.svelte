@@ -7,6 +7,12 @@
 		const { invoke } = await import('@tauri-apps/api/core');
 		message = await invoke('greet', { name: 'User' });
 	}
+
+	import { checkForAppUpdates } from '$lib/utils/updater';
+
+	async function handleUpdateCheck() {
+		await checkForAppUpdates(true);
+	}
 </script>
 
 <main>
@@ -19,4 +25,5 @@
 			Change a few things up and try submitting again.
 		</Alert>
 	</div>
+	<Button on:click={handleUpdateCheck}>Check update</Button>
 </main>

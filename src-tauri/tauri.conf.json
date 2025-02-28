@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2.0.0-rc",
   "productName": "tauri-updater",
-  "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "version": "0.0.1",
+  "identifier": "com.kfilip10.updater",
   "build": {
     "frontendDist": "../frontend/build",
     "devUrl": "http://localhost:5173",
@@ -38,11 +38,12 @@
   "plugins": {
     "updater": {
       "active": true,
+      "installMode": "basicUi",
       "endpoints": [
-        "https://github.com/your-username/your-repo/releases/latest/download/latest.json"
+        "https://github.com/kfilip10/tauri-update-app/releases/latest/download/latest.json"
       ],
       "dialog": true,
-      "pubkey": "YOUR_PUBLIC_KEY_HERE"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDc5MTA2OUFFOUIyODYyMTYKUldRV1lpaWJybWtRZWQ4UlBYYVYzVnVhK1VnQmRlNkdHVS9EZmlsaHRYa09TZ2xyZThwS0VMWXcK"
     }
   }
 }
