@@ -40,7 +40,7 @@
       "active": true,
       "installMode": "basicUi",
       "endpoints": [
-        "https://github.com/kfilip10/tauri-update-app/blob/main/latest.json"
+        "https://raw.githubusercontent.com/kfilip10/tauri-update-app/refs/heads/main/latest.json"
       ],
       "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQ5MjU0Qjc0M0U4MTE2OTkKUldTWkZvRStkRXNsMlJWNVJMb24rYmN0ckxNZE1NbTdRME9VakN0NDU0QUdRU0x5TUNpL09peXkK"
