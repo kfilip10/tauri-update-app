@@ -7,7 +7,17 @@
 		const { invoke } = await import('@tauri-apps/api/core');
 		message = await invoke('greet', { name: 'User' });
 	}
-
+	async function testDownload() {
+		const { invoke } = await import('@tauri-apps/api/core');
+		const url =
+			'https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.2/tauri-updater_0.0.2_x64_en-US.msi.zip';
+		try {
+			await invoke('download_file', { url });
+			console.log('Download successful!');
+		} catch (error) {
+			console.error('Download error:', error);
+		}
+	}
 	import { getCurrentVersion, checkForAppUpdates, displayVersionInfo } from '$lib/utils/updater';
 	let currentVersion = 'Loading...';
 
@@ -32,4 +42,6 @@
 	</div>
 	<Button on:click={handleUpdateCheck}>Check for Updates</Button>
 	<Button on:click={showVersionInfo}>Version Info</Button>
+
+	<Button on:click={testDownload}>Manual download</Button>
 </main>

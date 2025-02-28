@@ -32,13 +32,14 @@ export async function checkForAppUpdates(onUserClick: boolean = false) {
           okLabel: 'OK'
         });
       }
+      
       return;
     }
     
     // Check if the update object has the necessary fields
     if (update?.available && update?.version) {
       const yes = await ask(
-        `Update ${update.version} is available!\n\nCurrent version: ${currentVersion}\n\n${
+        `Update ${update.version} is available!\n\nCurrent version: ${currentVersion}\n\n ${update.rawJson}${
           update.body || 'Release notes not available.'
         }`, { 
           title: 'Update Available',
