@@ -16,9 +16,9 @@
 </script>
 
 <main>
-	<h1>Welcome to Tauri + SvelteKit</h1>
+	<h1>Welcome to Tauri and SvelteKit</h1>
 	<p>{message}</p>
-	<Button on:click={callRust}>Call Rust</Button>
+	<Button on:click={callRust}>Call Rusty</Button>
 	<div class="p-8">
 		<Alert>
 			<span class="font-medium">Info alert!</span>
