@@ -5,7 +5,7 @@
   "platforms": {
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTWkZvRStkRXNsMlZGNytwaXJZc051d1k1UnFPeG1zYkl4ZEJNNy9xbTZEWU9NVzRZUGFHZnpPZnpZVjR5Q3B2djVpU29RRXhIMDc4YVdLR1EyZmpDWFdQYjZoSE5vUFFjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQwNzg3OTYxCWZpbGU6dGF1cmktdXBkYXRlcl8wLjAuMl94NjRfZW4tVVMubXNpCkhUdFc2dEk2dDduQ0ZXUG1uckcxR3o5cUMzSERwUDlveThsWW5ScDI4WDI3QmJHT2ZDNm54WnNIWE1pNk9vbm1LM0dJMkYxdm10NFdMRERkUG12bUFBPT0K",
-      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.2/tauri-updater_0.0.2_x64_en-US.msi"
+      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/0.0.2/tauri-updater_0.0.2_x64_en-US.msi"
     }
   }
 }
