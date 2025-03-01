@@ -47,6 +47,8 @@
 		"@tailwindcss/postcss": "^4.0.9",
 		"@tauri-apps/api": "^2.3.0",
 		"@tauri-apps/plugin-dialog": "^2.2.0",
+		"@tauri-apps/plugin-http": "^2.3.0",
+		"@tauri-apps/plugin-process": "^2.2.0",
 		"@tauri-apps/plugin-updater": "^2.5.1"
 	}
 }

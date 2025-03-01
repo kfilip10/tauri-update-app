@@ -1,11 +1,11 @@
 {
-  "version": "0.0.2",
-  "notes": "Your Release Notes go here",
-  "pub_date": "2025-02-28T11:18:57Z",
+  "version": "0.0.1",
+  "notes": "Your Release Notes go her!!!! !  e",
+  "pub_date": "2025-02-28T15:18:57Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTWkZvRStkRXNsMlNPT0orY1pKNExSWVFmSVBqSzdYc2twY01wSzRjVWZjbXR3aXQ4NGV0SHR1WUs1MzJ3V2ErSXlJMXRPOUZsa1FiUmw3VkttbExUY3pvZHN5TEpNVndRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQwNzQyNTk2CWZpbGU6dGF1cmktdXBkYXRlcl8wLjAuMl94NjRfZW4tVVMubXNpLnppcApDT2hUWjJhU01MVW9tK3ZhekFZc2Naaks1RjFUa0UxSUc5QXl4V1JZYmN3bXJtT2M3cisydm9aVVlDODhieWVXekh4R2cyOXkvNGlCU0VJOUFaUENEQT09Cg==",
-      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.2/tauri-updater_0.0.2_x64_en-US.msi.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTWkZvRStkRXNsMld6emc3SzlvTVpwbzdneXFRcUZkb1QwdEllTHVVSC9nZGVuZWpwRUhTcWpEM05ZVEM4SklNQWUrV1VmeVZXYUhJUW1qRHIyb2xyMGhCL3U5RGRRb3c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzQwNzg3MTYxCWZpbGU6dGF1cmktdXBkYXRlcl8wLjAuMV94NjRfZW4tVVMubXNpCjZXakNEWFRJMzhmY1M5K0J2WVd4VmVtbW51ejhzSmY0YzR4UTZocmVMSndWY0ttdkc1U21FUDFpcEVxeFJFTGhqQ1NlRldlaHN0dGZjVGdZenA1Y0JBPT0K",
+      "url": "https://github.com/kfilip10/tauri-update-app/releases/download/v0.0.1/tauri-updater_0.0.1_x64_en-US.msi"
     }
   }
 }

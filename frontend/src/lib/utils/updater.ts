@@ -1,111 +1,127 @@
-import { check } from '@tauri-apps/plugin-updater';
-import { ask, message } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
-import { getVersion } from '@tauri-apps/api/app';
+import { relaunch } from '@tauri-apps/plugin-process';
+import { message, ask } from '@tauri-apps/plugin-dialog';
+import { get, writable } from 'svelte/store';
 
-// Get the current app version
-export async function getCurrentVersion(): Promise<string> {
-  try {
-    return await getVersion();
-  } catch (error) {
-    console.error('Failed to get app version:', error);
-    return 'unknown';
-  }
+// Interface for the update info returned by Rust
+interface UpdateInfo {
+  available: boolean;
+  version?: string;
+  body?: string;
+  date?: string;
+  downloadUrl?: string;
 }
 
-// Check for updates with version comparison
-export async function checkForAppUpdates(onUserClick: boolean = false) {
+// Interface for the progress info
+interface UpdateProgress {
+  downloading: boolean;
+  percent: number;
+  downloaded: number;
+  total?: number;
+  complete: boolean;
+  error?: string;
+}
+
+// Create a store for managing the progress dialog visibility
+export const updateProgressVisible = writable(false);
+export const updateComplete = writable(false);
+export const updateError = writable<string | null>(null);
+
+export async function checkForUpdates() {
   try {
-    // Get current version for display
-    const currentVersion = await getCurrentVersion();
-    console.log(`Current app version: ${currentVersion}`);
+    // Check for updates using the Rust command
+    const response = await invoke<string>('check_for_updates');
+    const updateInfo: UpdateInfo = JSON.parse(response);
     
-    const update = await check();
-    console.log('Update check result:', update);
+    console.log('Update check result:', updateInfo);
     
-    // Handle the case when no update is available
-    if (update === null) {
-      if (onUserClick) {
-        await message(`You are on the latest version (${currentVersion}).`, { 
-          title: 'No Update Available',
-          kind: 'info',
-          okLabel: 'OK'
-        });
-      }
-      
+    if (!updateInfo.available) {
+      console.log('No update available');
+      await message('You are running the latest version.', {
+        title: 'No Update Available'
+      });
       return;
     }
     
-    // Check if the update object has the necessary fields
-    if (update?.available && update?.version) {
-      const yes = await ask(
-        `Update ${update.version} is available!\n\nCurrent version: ${currentVersion}\n\n ${update.rawJson}${
-          update.body || 'Release notes not available.'
-        }`, { 
-          title: 'Update Available',
-          kind: 'info',
-          okLabel: 'Update',
-          cancelLabel: 'Cancel'
-        }
-      );
-      
-      if (yes) {
-        try {
-          await update.downloadAndInstall();
-          await message('Update downloaded. The application will restart now.', {
-            title: 'Update Ready',
-            kind: 'info',
-            okLabel: 'OK'
-          });
-          await invoke("graceful_restart");
-        } catch (error) {
-          console.error('Update failed:', error);
-          await message(`Update failed: ${error}`, { 
-            title: 'Update Error',
-            kind: 'error',
-            okLabel: 'OK'
-          });
-        }
+    // Show confirmation dialog
+    const shouldUpdate = await ask(
+      `A new version (${updateInfo.version}) is available.\n\n` +
+      `Release notes:\n${updateInfo.body || 'No release notes'}\n\n` +
+      `Published on: ${updateInfo.date || 'Unknown date'}\n\n` +
+      'Would you like to update now?',
+      {
+        title: 'Update Available',
+        okLabel: 'Yes, update now',
+        cancelLabel: 'No, remind me later'
       }
-    } else if (onUserClick) {
-      await message(`You are on the latest version (${currentVersion}). Stay awesome!`, { 
-        title: 'No Update Available',
-        kind: 'info',
-        okLabel: 'OK'
-      });
+    );
+    
+    if (shouldUpdate) {
+      // Reset state
+      updateComplete.set(false);
+      updateError.set(null);
+      
+      try {
+        // Show progress dialog by setting the store value
+        updateProgressVisible.set(true);
+        
+        // Start download and installation in Rust
+        await invoke('download_and_install_update');
+        
+        // Wait until update is complete or has error
+        await new Promise<void>((resolve, reject) => {
+          const unsubComplete = updateComplete.subscribe(value => {
+            if (value) {
+              unsubComplete();
+              unsubError();
+              resolve();
+            }
+          });
+          
+          const unsubError = updateError.subscribe(err => {
+            if (err) {
+              unsubComplete();
+              unsubError();
+              reject(new Error(err));
+            }
+          });
+        });
+        
+        // Hide progress dialog
+        updateProgressVisible.set(false);
+        
+        // When complete, show success message and relaunch
+        await message('Update has been downloaded and will be installed now. The application will restart.', {
+          title: 'Update Ready'
+        });
+        
+        await relaunch();
+      } catch (error) {
+        // Hide progress dialog
+        updateProgressVisible.set(false);
+        
+        console.error('Update installation failed:', error);
+        await message(`Failed to install update: ${error}`, {
+          title: 'Update Error'
+        });
+      }
+    } else {
+      console.log('User declined the update');
     }
   } catch (error) {
     console.error('Update check failed:', error);
-    if (onUserClick) {
-      const currentVersion = await getCurrentVersion().catch(() => 'unknown');
-      await message(`Failed to check for updates: ${error}\nCurrent version: ${currentVersion}`, { 
-        title: 'Error',
-        kind: 'error',
-        okLabel: 'OK'
-      });
-    }
+    await message(`Failed to check for updates: ${error}`, {
+      title: 'Update Error'
+    });
   }
 }
 
-// Add a debug function to display version info
-export async function displayVersionInfo() {
-  try {
-    const currentVersion = await getCurrentVersion();
-    const update = await check().catch(() => null);
-    
-    let message = `Current version: ${currentVersion}\n`;
-    
-    if (update) {
-      message += `Latest available version: ${update.version || 'unknown'}\n`;
-      message += `Update available: ${update.available ? 'Yes' : 'No'}\n`;
-      if (update.body) message += `Release notes: ${update.body}\n`;
-    } else {
-      message += "Couldn't retrieve update information.";
-    }
-    
-    return message;
-  } catch (error) {
-    console.error('Failed to get version info:', error);
-    return `Error getting version info: ${error}`;
-  }
+// Called by the progress component when the update is complete
+export function handleUpdateComplete() {
+  updateComplete.set(true);
+}
+
+// Called by the progress component when there's an error
+export function handleUpdateError(error: string) {
+  updateError.set(error);
 }

@@ -1,12 +1,19 @@
 <script lang="ts">
 	let message = 'Click the button to run Rust backend!';
-	import { Alert } from 'flowbite-svelte';
-	import { Button } from 'flowbite-svelte';
+	import { Alert, Button } from 'flowbite-svelte';
+	import {
+		checkForUpdates,
+		updateProgressVisible,
+		handleUpdateComplete,
+		handleUpdateError
+	} from '$lib/utils/updater';
+	import UpdateProgress from '$lib/components/UpdateProgress.svelte';
 
 	async function callRust() {
 		const { invoke } = await import('@tauri-apps/api/core');
 		message = await invoke('greet', { name: 'User' });
 	}
+
 	async function testDownload() {
 		const { invoke } = await import('@tauri-apps/api/core');
 		const url =
@@ -18,15 +25,11 @@
 			console.error('Download error:', error);
 		}
 	}
-	import { getCurrentVersion, checkForAppUpdates, displayVersionInfo } from '$lib/utils/updater';
+
 	let currentVersion = 'Loading...';
 
 	async function handleUpdateCheck() {
-		await checkForAppUpdates(true);
-	}
-	async function showVersionInfo() {
-		const info = await displayVersionInfo();
-		alert(info);
+		await checkForUpdates();
 	}
 </script>
 
@@ -41,7 +44,11 @@
 		</Alert>
 	</div>
 	<Button on:click={handleUpdateCheck}>Check for Updates</Button>
-	<Button on:click={showVersionInfo}>Version Info</Button>
 
-	<Button on:click={testDownload}>Manual download</Button>
+	<!-- Progress modal -->
+	<UpdateProgress
+		bind:open={$updateProgressVisible}
+		onComplete={handleUpdateComplete}
+		onError={handleUpdateError}
+	/>
 </main>
