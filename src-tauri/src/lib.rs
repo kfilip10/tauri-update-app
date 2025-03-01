@@ -63,6 +63,7 @@ pub fn run() {
         })
         // Register the commands
         .invoke_handler(tauri::generate_handler![
+            greet,
             check_for_updates,
             download_and_install_update,
             get_update_progress
