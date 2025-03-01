@@ -16,6 +16,18 @@
     "http:allow-fetch",
     "http:allow-fetch-cancel",
     "http:allow-fetch-read-body",
-    "http:allow-fetch-send"
+    "http:allow-fetch-send",
+    "fs:allow-read",
+    "fs:allow-write",
+    "fs:allow-mkdir",
+    {
+      "identifier": "fs:default",
+      "allow": [
+        {
+          "path": "H:/1-Git/grade-tool-tauri/src-tauri/assets/r-win/bin/Rscript.exe",
+          "kind": "binary"
+        }
+      ]
+    }
   ]
 }

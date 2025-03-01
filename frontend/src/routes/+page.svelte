@@ -1,13 +1,21 @@
 <script lang="ts">
-	let message = 'Click the button to run Rust backend!';
 	import { Alert, Button } from 'flowbite-svelte';
+
+	import UpdateProgress from '$lib/components/UpdateProgress.svelte';
+	import { onMount } from 'svelte';
+	import { invoke } from '@tauri-apps/api/core';
+
 	import {
 		checkForUpdates,
 		updateProgressVisible,
 		handleUpdateComplete,
 		handleUpdateError
 	} from '$lib/utils/updater';
-	import UpdateProgress from '$lib/components/UpdateProgress.svelte';
+
+	import { launchShinyApp, stopShinyApp } from '$lib/utils/shiny';
+	let rscriptPath = '';
+	let shinyPath = '';
+	let message = 'Click the button to run Rust backend!';
 
 	async function callRust() {
 		const { invoke } = await import('@tauri-apps/api/core');
@@ -26,11 +34,40 @@
 		}
 	}
 
-	let currentVersion = 'Loading...';
-
 	async function handleUpdateCheck() {
 		await checkForUpdates();
 	}
+
+	async function handleShinyStart() {
+		await launchShinyApp();
+	}
+	async function handleShinyStop() {
+		await stopShinyApp();
+	}
+	async function fetchRscriptPath() {
+		const { invoke } = await import('@tauri-apps/api/core');
+
+		try {
+			rscriptPath = await invoke<string>('get_rscript_path');
+			console.log('Rscript path:', rscriptPath);
+			//combine the paths with a new line inbetween
+			rscriptPath = rscriptPath;
+		} catch (error) {
+			console.error('Failed to get Rscript path:', error);
+			rscriptPath = 'Error retrieving Rscript path';
+		}
+	}
+	async function testRExecution() {
+		try {
+			const result = await invoke('test_r_script');
+			console.log('R test result:', result);
+		} catch (error) {
+			console.error('R test error:', error);
+		}
+	}
+	onMount(async () => {
+		await fetchRscriptPath();
+	});
 </script>
 
 <main>
@@ -51,4 +88,10 @@
 		onComplete={handleUpdateComplete}
 		onError={handleUpdateError}
 	/>
+
+	<h1>Shiny App</h1>
+	<p>Rscript Path: {rscriptPath}</p>
+	<Button on:click={handleShinyStart}>Start Shiny App</Button>
+	<Button on:click={handleShinyStop}>Stop Shiny App</Button>
+	<Button on:click={testRExecution}>Test R Execution</Button>
 </main>
