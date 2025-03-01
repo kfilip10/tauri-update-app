@@ -3,6 +3,7 @@
 
 # Ignore public key files
 *.key.pub
+*.code-workspace
 
 # Ignore .env files which might contain sensitive information
 .env
